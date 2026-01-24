@@ -38,5 +38,15 @@
     "status": "downloaded",
     "version": "neoforge-1.21.11-1.40.6",
     "file": "xaeroworldmap-neoforge-1.21.11-1.40.6.jar"
+  },
+  {
+    "query": "just-zoom",
+    "id": "iAiqcykM",
+    "slug": "just-zoom",
+    "title": "Just Zoom",
+    "resolvedBy": "slug",
+    "status": "downloaded",
+    "version": "2.1.3-1.21.11-neoforge",
+    "file": "justzoom_neoforge_2.1.3_MC_1.21.11.jar"
   }
 ]
