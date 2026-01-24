@@ -28,5 +28,15 @@
     "status": "downloaded",
     "version": "mc1.21.11-0.8.2-neoforge",
     "file": "sodium-neoforge-0.8.2+mc1.21.11.jar"
+  },
+  {
+    "query": "xaeros-world-map",
+    "id": "NcUtCpym",
+    "slug": "xaeros-world-map",
+    "title": "Xaero's World Map",
+    "resolvedBy": "slug",
+    "status": "downloaded",
+    "version": "neoforge-1.21.11-1.40.6",
+    "file": "xaeroworldmap-neoforge-1.21.11-1.40.6.jar"
   }
 ]
