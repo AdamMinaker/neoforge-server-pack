@@ -121,6 +121,19 @@ function loadModList(filePath) {
     .filter((line) => line && !line.startsWith("#"));
 }
 
+function loadModJson(filePath) {
+  const raw = fs.readFileSync(filePath, "utf8");
+  const data = JSON.parse(raw);
+  if (!Array.isArray(data)) {
+    throw new Error(`Expected JSON array in ${filePath}`);
+  }
+  const mods = data.map((item) => String(item).trim()).filter(Boolean);
+  if (mods.length === 0) {
+    throw new Error(`No mods found in ${filePath}`);
+  }
+  return mods;
+}
+
 function parseArgs(argv) {
   const args = {
     loader: "neoforge",
@@ -152,6 +165,7 @@ function printHelp() {
   node modrinth_download.js [--loader neoforge] [--game-version 1.21.1] [--output mods]
   node modrinth_download.js --mods better-combat another-furniture
   node modrinth_download.js --mods-file mods.txt
+  node modrinth_download.js --mods-file mods/mods.json
 `);
 }
 
@@ -162,18 +176,21 @@ async function main() {
     return 0;
   }
 
-  const defaultMods = [
-    "better-combat",
-    "another-furniture",
-    "high-speed-rail",
-    "gravestone-mod",
-    "xaeros-world-map",
-    "lootr",
-  ];
+  const defaultModsJson = path.join(process.cwd(), "mods", "mods.json");
 
-  let mods = defaultMods;
-  if (args.modsFile) mods = loadModList(args.modsFile);
-  else if (args.mods && args.mods.length > 0) mods = args.mods;
+  let mods = null;
+  if (args.modsFile) {
+    if (args.modsFile.endsWith(".json")) mods = loadModJson(args.modsFile);
+    else mods = loadModList(args.modsFile);
+  } else if (args.mods && args.mods.length > 0) {
+    mods = args.mods;
+  } else if (fs.existsSync(defaultModsJson)) {
+    mods = loadModJson(defaultModsJson);
+  } else {
+    console.error(`Missing default mod list: ${defaultModsJson}`);
+    console.error("Provide --mods, --mods-file, or create mods/mods.json.");
+    return 2;
+  }
 
   fs.mkdirSync(args.output, { recursive: true });
 

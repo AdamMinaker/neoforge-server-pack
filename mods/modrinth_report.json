@@ -68,5 +68,15 @@
     "status": "downloaded",
     "version": "2.4.5-b-1.21.11",
     "file": "DistantHorizons-2.4.5-b-1.21.11-fabric-neoforge.jar"
+  },
+  {
+    "query": "xaeros-minimap",
+    "id": "1bokaNcj",
+    "slug": "xaeros-minimap",
+    "title": "Xaero's Minimap",
+    "resolvedBy": "slug",
+    "status": "downloaded",
+    "version": "neoforge-1.21.11-25.3.5",
+    "file": "xaerominimap-neoforge-1.21.11-25.3.5.jar"
   }
 ]

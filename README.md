@@ -2,6 +2,24 @@
 
 This server runs NeoForge 1.21.11. You must install NeoForge and the same mods to join.
 
+## Add mods (maintainers)
+Use the helper to add mod slugs and rebuild the pack in one step:
+
+```
+node add_mod.js xaeros-minimap
+node add_mod.js https://modrinth.com/mod/xaeros-minimap
+```
+
+This updates `mods/mods.json`, downloads the full mod list, and rebuilds
+`neoforge-1.21.11-gravestone.mrpack`.
+
+To remove mods and rebuild:
+
+```
+node remove_mod.js xaeros-minimap
+node remove_mod.js https://modrinth.com/mod/xaeros-minimap
+```
+
 ## 1) Install Prism Launcher + import
 1. Download Prism Launcher from https://prismlauncher.org and install it.
 2. Open Prism Launcher and finish the first-run setup.
