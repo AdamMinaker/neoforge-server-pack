@@ -17,6 +17,9 @@ function parseArgs(argv) {
     mods: [],
     update: true,
     ...DEFAULTS,
+    externalUrl: null,
+    externalFile: null,
+    externalName: null,
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -27,6 +30,9 @@ function parseArgs(argv) {
     else if (arg === "--mods-dir") args.modsDir = argv[++i];
     else if (arg === "--report") args.report = argv[++i];
     else if (arg === "--output") args.outputPack = argv[++i];
+    else if (arg === "--external-url") args.externalUrl = argv[++i];
+    else if (arg === "--external-file") args.externalFile = argv[++i];
+    else if (arg === "--external-name") args.externalName = argv[++i];
     else if (arg === "--help" || arg === "-h") return { help: true };
     else args.mods.push(arg);
   }
@@ -39,6 +45,7 @@ function printHelp() {
   node add_mod.js https://modrinth.com/mod/xaeros-minimap
   node add_mod.js irons-spells-n-spellbooks --no-update
   node add_mod.js foo bar --game-version 1.21.11 --loader neoforge
+  node add_mod.js --external-url https://example.com/mod.jar --external-file Configured-2.7.3.jar
   `);
 }
 
@@ -51,6 +58,19 @@ function loadModsJson(filePath) {
 }
 
 function saveModsJson(filePath, mods) {
+  const content = JSON.stringify(mods, null, 2) + "\n";
+  fs.writeFileSync(filePath, content);
+}
+
+function loadExternalJson(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+  const raw = fs.readFileSync(filePath, "utf8");
+  const data = JSON.parse(raw);
+  if (!Array.isArray(data)) throw new Error(`Expected JSON array in ${filePath}`);
+  return data;
+}
+
+function saveExternalJson(filePath, mods) {
   const content = JSON.stringify(mods, null, 2) + "\n";
   fs.writeFileSync(filePath, content);
 }
@@ -83,23 +103,44 @@ function main() {
     printHelp();
     return 0;
   }
-  if (!args.mods.length) {
-    console.error("Provide at least one mod slug.");
+  if (!args.mods.length && !args.externalUrl && !args.externalFile) {
+    console.error("Provide at least one mod slug or an external mod.");
     return 2;
   }
 
-  const normalizedMods = args.mods
-    .map(normalizeModInput)
-    .filter(Boolean);
+  const normalizedMods = args.mods.map(normalizeModInput).filter(Boolean);
 
-  const modsJsonPath = path.join(process.cwd(), "mods", "mods.json");
-  const current = loadModsJson(modsJsonPath);
-  const set = new Set(current);
-  for (const mod of normalizedMods) set.add(mod);
+  if (normalizedMods.length > 0) {
+    const modsJsonPath = path.join(process.cwd(), "mods", "mods.json");
+    const current = loadModsJson(modsJsonPath);
+    const set = new Set(current);
+    for (const mod of normalizedMods) set.add(mod);
+    const updated = [...set];
+    saveModsJson(modsJsonPath, updated);
+    console.log(`Updated ${modsJsonPath} with ${normalizedMods.length} mod(s).`);
+  }
 
-  const updated = [...set];
-  saveModsJson(modsJsonPath, updated);
-  console.log(`Updated ${modsJsonPath} with ${normalizedMods.length} mod(s).`);
+  if (args.externalUrl || args.externalFile || args.externalName) {
+    if (!args.externalUrl || !args.externalFile) {
+      console.error("External mods require --external-url and --external-file.");
+      return 2;
+    }
+    const externalFilePath = path.isAbsolute(args.externalFile)
+      ? args.externalFile
+      : path.join(process.cwd(), "mods", args.externalFile);
+    if (!fs.existsSync(externalFilePath)) {
+      console.error(`External mod file not found: ${externalFilePath}`);
+      return 2;
+    }
+    const externalPath = path.join(process.cwd(), "mods", "external_mods.json");
+    const external = loadExternalJson(externalPath);
+    const filename = path.basename(args.externalFile);
+    const name = args.externalName || filename;
+    const filtered = external.filter((entry) => entry.file !== filename);
+    filtered.push({ name, file: filename, url: args.externalUrl });
+    saveExternalJson(externalPath, filtered);
+    console.log(`Updated ${externalPath} with external mod ${filename}.`);
+  }
 
   if (!args.update) return 0;
 

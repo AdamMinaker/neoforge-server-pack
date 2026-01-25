@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const os = require("os");
+const crypto = require("crypto");
 const { spawnSync } = require("child_process");
 
 const API_BASE = "https://api.modrinth.com/v2";
@@ -47,12 +48,42 @@ async function getFileInfo(projectId, filename, gameVersion, loader) {
   return null;
 }
 
+function loadExternalMods(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+  const raw = fs.readFileSync(filePath, "utf8");
+  const data = JSON.parse(raw);
+  if (!Array.isArray(data)) {
+    throw new Error(`Expected JSON array in ${filePath}`);
+  }
+  return data;
+}
+
+function hashFile(filePath, algorithm) {
+  const hash = crypto.createHash(algorithm);
+  const data = fs.readFileSync(filePath);
+  hash.update(data);
+  return hash.digest("hex");
+}
+
+function normalizeExternalEntry(entry, modsDir) {
+  const fileValue = String(entry.file || "").trim();
+  if (!fileValue) throw new Error("External entry missing 'file'.");
+  const urlValue = String(entry.url || "").trim();
+  if (!urlValue) throw new Error("External entry missing 'url'.");
+  const localPath = path.isAbsolute(fileValue)
+    ? fileValue
+    : path.join(modsDir, fileValue);
+  const filename = path.basename(fileValue);
+  return { filename, localPath, url: urlValue };
+}
+
 function parseArgs(argv) {
   const args = {
     loader: "neoforge",
     gameVersion: "1.21.11",
     modsDir: "mods",
     report: "mods/modrinth_report.json",
+    external: "mods/external_mods.json",
     output: "neoforge-1.21.11.mrpack",
     name: "NeoForge 1.21.11 Mods",
     summary: "Auto-generated Modrinth pack for the server/client mod list.",
@@ -64,6 +95,7 @@ function parseArgs(argv) {
     else if (arg === "--game-version") args.gameVersion = argv[++i];
     else if (arg === "--mods-dir") args.modsDir = argv[++i];
     else if (arg === "--report") args.report = argv[++i];
+    else if (arg === "--external") args.external = argv[++i];
     else if (arg === "--output") args.output = argv[++i];
     else if (arg === "--name") args.name = argv[++i];
     else if (arg === "--summary") args.summary = argv[++i];
@@ -77,6 +109,7 @@ function printHelp() {
   console.log(`Usage:
   node modrinth_pack.js [--game-version 1.21.11] [--loader neoforge]
                         [--mods-dir mods] [--report mods/modrinth_report.json]
+                        [--external mods/external_mods.json]
                         [--output neoforge-1.21.11.mrpack]
                         [--loader-version 21.1.123]
 `);
@@ -117,6 +150,26 @@ async function main() {
       path: `mods/${entry.file}`,
       hashes: info.hashes,
       downloads: [info.url],
+      fileSize: stat.size,
+    });
+  }
+
+  const externalPath = path.resolve(args.external);
+  const externalMods = loadExternalMods(externalPath);
+  for (const entry of externalMods) {
+    const normalized = normalizeExternalEntry(entry, modsDir);
+    const stat = fs.statSync(normalized.localPath);
+    const filePath = `mods/${normalized.filename}`;
+    if (files.some((file) => file.path === filePath)) {
+      throw new Error(`Duplicate mod file in pack: ${filePath}`);
+    }
+    files.push({
+      path: filePath,
+      hashes: {
+        sha1: hashFile(normalized.localPath, "sha1"),
+        sha512: hashFile(normalized.localPath, "sha512"),
+      },
+      downloads: [normalized.url],
       fileSize: stat.size,
     });
   }

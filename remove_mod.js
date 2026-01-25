@@ -17,6 +17,7 @@ function parseArgs(argv) {
     mods: [],
     update: true,
     ...DEFAULTS,
+    removeExternal: false,
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -27,6 +28,7 @@ function parseArgs(argv) {
     else if (arg === "--mods-dir") args.modsDir = argv[++i];
     else if (arg === "--report") args.report = argv[++i];
     else if (arg === "--output") args.outputPack = argv[++i];
+    else if (arg === "--external") args.removeExternal = true;
     else if (arg === "--help" || arg === "-h") return { help: true };
     else args.mods.push(arg);
   }
@@ -39,6 +41,7 @@ function printHelp() {
   node remove_mod.js https://modrinth.com/mod/xaeros-minimap
   node remove_mod.js irons-spells-n-spellbooks --no-update
   node remove_mod.js foo bar --game-version 1.21.11 --loader neoforge
+  node remove_mod.js --external https://example.com/mod.jar
   `);
 }
 
@@ -51,6 +54,19 @@ function loadModsJson(filePath) {
 }
 
 function saveModsJson(filePath, mods) {
+  const content = JSON.stringify(mods, null, 2) + "\n";
+  fs.writeFileSync(filePath, content);
+}
+
+function loadExternalJson(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+  const raw = fs.readFileSync(filePath, "utf8");
+  const data = JSON.parse(raw);
+  if (!Array.isArray(data)) throw new Error(`Expected JSON array in ${filePath}`);
+  return data;
+}
+
+function saveExternalJson(filePath, mods) {
   const content = JSON.stringify(mods, null, 2) + "\n";
   fs.writeFileSync(filePath, content);
 }
@@ -92,16 +108,35 @@ function main() {
     .map(normalizeModInput)
     .filter(Boolean);
 
-  const modsJsonPath = path.join(process.cwd(), "mods", "mods.json");
-  const current = loadModsJson(modsJsonPath);
-  const removeSet = new Set(normalizedMods);
-  const updated = current.filter((mod) => !removeSet.has(mod));
+  if (normalizedMods.length > 0) {
+    const modsJsonPath = path.join(process.cwd(), "mods", "mods.json");
+    const current = loadModsJson(modsJsonPath);
+    const removeSet = new Set(normalizedMods);
+    const updated = current.filter((mod) => !removeSet.has(mod));
 
-  if (updated.length === current.length) {
-    console.log("No matching mods found to remove.");
-  } else {
-    saveModsJson(modsJsonPath, updated);
-    console.log(`Updated ${modsJsonPath} with ${normalizedMods.length} removal(s).`);
+    if (updated.length === current.length) {
+      console.log("No matching mods found to remove.");
+    } else {
+      saveModsJson(modsJsonPath, updated);
+      console.log(`Updated ${modsJsonPath} with ${normalizedMods.length} removal(s).`);
+    }
+  }
+
+  if (args.removeExternal) {
+    const externalPath = path.join(process.cwd(), "mods", "external_mods.json");
+    const external = loadExternalJson(externalPath);
+    const removed = external.filter((entry) => {
+      const url = String(entry.url || "");
+      const file = String(entry.file || "");
+      const name = String(entry.name || "");
+      return !normalizedMods.some(
+        (mod) => mod === url || mod === file || mod === name
+      );
+    });
+    if (removed.length !== external.length) {
+      saveExternalJson(externalPath, removed);
+      console.log(`Updated ${externalPath} with ${normalizedMods.length} removal(s).`);
+    }
   }
 
   if (!args.update) return 0;

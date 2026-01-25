@@ -13,11 +13,24 @@ node add_mod.js https://modrinth.com/mod/xaeros-minimap
 This updates `mods/mods.json`, downloads the full mod list, and rebuilds
 `neoforge-1.21.11-gravestone.mrpack`.
 
+For non-Modrinth mods (e.g. CurseForge-only), download the jar into `mods/`,
+then register it with a direct download URL:
+
+```
+node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar
+```
+
 To remove mods and rebuild:
 
 ```
 node remove_mod.js xaeros-minimap
 node remove_mod.js https://modrinth.com/mod/xaeros-minimap
+```
+
+To remove a non-Modrinth mod entry:
+
+```
+node remove_mod.js --external Configured-2.7.3.jar
 ```
 
 ## 1) Install Prism Launcher + import

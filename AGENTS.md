@@ -22,6 +22,13 @@ node add_mod.js https://modrinth.com/mod/xaeros-minimap
 Tip: use this for all future mod additions to keep `mods/mods.json` and the
 pack in sync.
 
+To add a non-Modrinth mod, download the jar into `mods/` and then register it
+with a direct download URL:
+
+```
+node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar
+```
+
 ## Remove mod + rebuild pack
 Uses `remove_mod.js` to remove mod slugs from `mods/mods.json`, then downloads
 mods and rebuilds the pack.
@@ -29,6 +36,12 @@ mods and rebuilds the pack.
 ```
 node remove_mod.js xaeros-minimap
 node remove_mod.js https://modrinth.com/mod/xaeros-minimap
+```
+
+To remove a non-Modrinth mod entry:
+
+```
+node remove_mod.js --external Configured-2.7.3.jar
 ```
 
 ## Build the Modrinth pack
