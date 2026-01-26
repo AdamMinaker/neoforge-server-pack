@@ -118,5 +118,17 @@
     "status": "downloaded",
     "version": "2.14.10",
     "file": "CreativeCore_NEOFORGE_v2.14.10_mc1.21.11.jar"
+  },
+  {
+    "query": "sound-physics-remastered",
+    "id": "qyVF9oeo",
+    "slug": "sound-physics-remastered",
+    "title": "Sound Physics Remastered",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "neoforge-1.21.11-1.5.1",
+    "file": "sound-physics-remastered-neoforge-1.21.11-1.5.1.jar"
   }
 ]
