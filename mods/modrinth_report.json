@@ -154,5 +154,17 @@
     "status": "downloaded",
     "version": "neoforge-1.21.11-6.6.2",
     "file": "libIPN-neoforge-1.21.11-6.6.2.jar"
+  },
+  {
+    "query": "kotlin-for-forge",
+    "id": "ordsPcFz",
+    "slug": "kotlin-for-forge",
+    "title": "Kotlin for Forge",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "6.0.0",
+    "file": "kotlinforforge-6.0.0-all.jar"
   }
 ]
