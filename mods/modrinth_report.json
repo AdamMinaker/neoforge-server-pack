@@ -130,5 +130,17 @@
     "status": "downloaded",
     "version": "neoforge-1.21.11-1.5.1",
     "file": "sound-physics-remastered-neoforge-1.21.11-1.5.1.jar"
+  },
+  {
+    "query": "inventory-profiles-next",
+    "id": "O7RBXm3n",
+    "slug": "inventory-profiles-next",
+    "title": "Inventory Profiles Next",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "unsupported",
+    "status": "downloaded",
+    "version": "neoforge-1.21.11-2.2.3",
+    "file": "InventoryProfilesNext-neoforge-1.21.11-2.2.3.jar"
   }
 ]
