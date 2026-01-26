@@ -40,7 +40,7 @@ node remove_mod.js --external Configured-2.7.3.jar
 ```
 
 ## Server mod list
-To copy only server-safe jars into `server_mods/`:
+To copy server-supported jars into `server_mods/`:
 
 ```
 node server_mods.js --clean

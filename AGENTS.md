@@ -51,7 +51,7 @@ node remove_mod.js --external Configured-2.7.3.jar
 ```
 
 ## Build server mod list
-Copies server-safe jars into `server_mods/` based on side metadata.
+Copies server-supported jars into `server_mods/` based on side metadata.
 
 ```
 node server_mods.js --clean
