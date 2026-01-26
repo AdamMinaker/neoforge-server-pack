@@ -20,6 +20,7 @@ function parseArgs(argv) {
     externalUrl: null,
     externalFile: null,
     externalName: null,
+    externalSide: null,
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -33,6 +34,7 @@ function parseArgs(argv) {
     else if (arg === "--external-url") args.externalUrl = argv[++i];
     else if (arg === "--external-file") args.externalFile = argv[++i];
     else if (arg === "--external-name") args.externalName = argv[++i];
+    else if (arg === "--external-side") args.externalSide = argv[++i];
     else if (arg === "--help" || arg === "-h") return { help: true };
     else args.mods.push(arg);
   }
@@ -45,7 +47,7 @@ function printHelp() {
   node add_mod.js https://modrinth.com/mod/xaeros-minimap
   node add_mod.js irons-spells-n-spellbooks --no-update
   node add_mod.js foo bar --game-version 1.21.11 --loader neoforge
-  node add_mod.js --external-url https://example.com/mod.jar --external-file Configured-2.7.3.jar
+  node add_mod.js --external-url https://example.com/mod.jar --external-file Configured-2.7.3.jar --external-side client
   `);
 }
 
@@ -137,7 +139,9 @@ function main() {
     const filename = path.basename(args.externalFile);
     const name = args.externalName || filename;
     const filtered = external.filter((entry) => entry.file !== filename);
-    filtered.push({ name, file: filename, url: args.externalUrl });
+    const record = { name, file: filename, url: args.externalUrl };
+    if (args.externalSide) record.side = args.externalSide;
+    filtered.push(record);
     saveExternalJson(externalPath, filtered);
     console.log(`Updated ${externalPath} with external mod ${filename}.`);
   }

@@ -29,6 +29,12 @@ with a direct download URL:
 node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar
 ```
 
+Add a side hint for non-Modrinth mods so server/client lists are accurate:
+
+```
+node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar --external-side client
+```
+
 ## Remove mod + rebuild pack
 Uses `remove_mod.js` to remove mod slugs from `mods/mods.json`, then downloads
 mods and rebuilds the pack.
@@ -42,6 +48,20 @@ To remove a non-Modrinth mod entry:
 
 ```
 node remove_mod.js --external Configured-2.7.3.jar
+```
+
+## Build server mod list
+Copies server-safe jars into `server_mods/` based on side metadata.
+
+```
+node server_mods.js --clean
+```
+
+## One-shot update (download, pack, server mods)
+Runs the full update workflow in one command.
+
+```
+node update_pack.js
 ```
 
 ## Build the Modrinth pack

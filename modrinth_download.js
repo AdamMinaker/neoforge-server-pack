@@ -85,6 +85,8 @@ async function resolveProject(query) {
       slug: project.slug,
       title: project.title,
       resolvedBy: "slug",
+      clientSide: project.client_side,
+      serverSide: project.server_side,
     };
   }
   const hit = await searchProject(query);
@@ -206,6 +208,13 @@ async function main() {
     }
 
     Object.assign(entry, project);
+    if (entry.resolvedBy === "search") {
+      const details = await tryGetProject(entry.slug);
+      if (details) {
+        entry.clientSide = details.client_side;
+        entry.serverSide = details.server_side;
+      }
+    }
     const version = await getLatestVersion(project.id, args.gameVersion, args.loader);
     if (!version) {
       entry.status = "no_version";

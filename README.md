@@ -20,6 +20,12 @@ then register it with a direct download URL:
 node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar
 ```
 
+Add a side hint for non-Modrinth mods so server/client lists are accurate:
+
+```
+node add_mod.js --external-url https://edge.forgecdn.net/files/.../Configured-2.7.3.jar --external-file Configured-2.7.3.jar --external-side client
+```
+
 To remove mods and rebuild:
 
 ```
@@ -31,6 +37,20 @@ To remove a non-Modrinth mod entry:
 
 ```
 node remove_mod.js --external Configured-2.7.3.jar
+```
+
+## Server mod list
+To copy only server-safe jars into `server_mods/`:
+
+```
+node server_mods.js --clean
+```
+
+## One-shot update
+To refresh mods, rebuild the pack, and copy server jars:
+
+```
+node update_pack.js
 ```
 
 ## 1) Install Prism Launcher + import
