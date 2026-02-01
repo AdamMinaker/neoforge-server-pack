@@ -10,7 +10,7 @@
   "ambientsounds",
   "creativecore",
   "sound-physics-remastered",
-  "inventory-profiles-next",
-  "libipn",
-  "kotlin-for-forge"
+  "kotlin-for-forge",
+  "inventory-essentials",
+  "balm"
 ]

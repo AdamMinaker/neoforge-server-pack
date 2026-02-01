@@ -104,8 +104,8 @@
     "clientSide": "required",
     "serverSide": "unsupported",
     "status": "downloaded",
-    "version": "6.3.3",
-    "file": "AmbientSounds_NEOFORGE_v6.3.3_mc1.21.11.jar"
+    "version": "6.3.4",
+    "file": "AmbientSounds_NEOFORGE_v6.3.4_mc1.21.11.jar"
   },
   {
     "query": "creativecore",
@@ -132,30 +132,6 @@
     "file": "sound-physics-remastered-neoforge-1.21.11-1.5.1.jar"
   },
   {
-    "query": "inventory-profiles-next",
-    "id": "O7RBXm3n",
-    "slug": "inventory-profiles-next",
-    "title": "Inventory Profiles Next",
-    "resolvedBy": "slug",
-    "clientSide": "required",
-    "serverSide": "unsupported",
-    "status": "downloaded",
-    "version": "neoforge-1.21.11-2.2.3",
-    "file": "InventoryProfilesNext-neoforge-1.21.11-2.2.3.jar"
-  },
-  {
-    "query": "libipn",
-    "id": "onSQdWhM",
-    "slug": "libipn",
-    "title": "libIPN",
-    "resolvedBy": "slug",
-    "clientSide": "required",
-    "serverSide": "unsupported",
-    "status": "downloaded",
-    "version": "neoforge-1.21.11-6.6.2",
-    "file": "libIPN-neoforge-1.21.11-6.6.2.jar"
-  },
-  {
     "query": "kotlin-for-forge",
     "id": "ordsPcFz",
     "slug": "kotlin-for-forge",
@@ -166,5 +142,29 @@
     "status": "downloaded",
     "version": "6.0.0",
     "file": "kotlinforforge-6.0.0-all.jar"
+  },
+  {
+    "query": "inventory-essentials",
+    "id": "Boon8xwi",
+    "slug": "inventory-essentials",
+    "title": "Inventory Essentials",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "21.11.3+neoforge-1.21.11",
+    "file": "inventoryessentials-neoforge-1.21.11-21.11.3.jar"
+  },
+  {
+    "query": "balm",
+    "id": "MBAkmtvl",
+    "slug": "balm",
+    "title": "Balm",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "21.11.6+neoforge-1.21.11",
+    "file": "balm-neoforge-1.21.11-21.11.6.jar"
   }
 ]
