@@ -166,5 +166,29 @@
     "status": "downloaded",
     "version": "21.11.6+neoforge-1.21.11",
     "file": "balm-neoforge-1.21.11-21.11.6.jar"
+  },
+  {
+    "query": "puzzles-lib",
+    "id": "QAGBst4M",
+    "slug": "puzzles-lib",
+    "title": "Puzzles Lib",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "21.11.6",
+    "file": "PuzzlesLib-v21.11.6-mc1.21.11-NeoForge.jar"
+  },
+  {
+    "query": "pick-up-notifier",
+    "id": "ZX66K16c",
+    "slug": "pick-up-notifier",
+    "title": "Pick Up Notifier",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "21.11.0",
+    "file": "PickUpNotifier-v21.11.0-mc1.21.11-NeoForge.jar"
   }
 ]

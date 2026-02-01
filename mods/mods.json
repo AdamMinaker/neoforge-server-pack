@@ -12,5 +12,7 @@
   "sound-physics-remastered",
   "kotlin-for-forge",
   "inventory-essentials",
-  "balm"
+  "balm",
+  "puzzles-lib",
+  "pick-up-notifier"
 ]
