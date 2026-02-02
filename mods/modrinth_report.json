@@ -176,8 +176,8 @@
     "clientSide": "optional",
     "serverSide": "optional",
     "status": "downloaded",
-    "version": "21.11.6",
-    "file": "PuzzlesLib-v21.11.6-mc1.21.11-NeoForge.jar"
+    "version": "21.11.4",
+    "file": "PuzzlesLib-v21.11.4-mc1.21.11-NeoForge.jar"
   },
   {
     "query": "pick-up-notifier",
