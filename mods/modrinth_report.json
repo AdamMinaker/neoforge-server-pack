@@ -299,5 +299,17 @@
     "status": "downloaded",
     "version": "21.11.1",
     "file": "fantasyfurniture-dunmer-21.11.1.jar"
+  },
+  {
+    "query": "apexcore",
+    "id": "xl3myxch",
+    "slug": "apexcore",
+    "title": "ApexCore",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.3",
+    "file": "apexcore-21.11.3.jar"
   }
 ]
