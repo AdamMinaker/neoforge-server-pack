@@ -175,6 +175,7 @@
     "resolvedBy": "slug",
     "clientSide": "optional",
     "serverSide": "optional",
+    "pinned": "21.11.4",
     "status": "downloaded",
     "version": "21.11.4",
     "file": "PuzzlesLib-v21.11.4-mc1.21.11-NeoForge.jar"
@@ -202,5 +203,17 @@
     "status": "downloaded",
     "version": "21.11.1",
     "file": "VisualWorkbench-v21.11.1-mc1.21.11-NeoForge.jar"
+  },
+  {
+    "query": "fallingtree",
+    "id": "Fb4jn8m6",
+    "slug": "fallingtree",
+    "title": "FallingTree",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "1.21.11-1.21.11.2",
+    "file": "FallingTree-1.21.11-1.21.11.2.jar"
   }
 ]

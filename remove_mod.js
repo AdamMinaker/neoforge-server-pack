@@ -18,6 +18,7 @@ function parseArgs(argv) {
     update: true,
     ...DEFAULTS,
     removeExternal: false,
+    pins: "mods/modrinth_pins.json",
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -28,6 +29,7 @@ function parseArgs(argv) {
     else if (arg === "--mods-dir") args.modsDir = argv[++i];
     else if (arg === "--report") args.report = argv[++i];
     else if (arg === "--output") args.outputPack = argv[++i];
+    else if (arg === "--pins") args.pins = argv[++i];
     else if (arg === "--external") args.removeExternal = true;
     else if (arg === "--help" || arg === "-h") return { help: true };
     else args.mods.push(arg);
@@ -149,6 +151,8 @@ function main() {
     args.gameVersion,
     "--output",
     args.modsDir,
+    "--pins",
+    args.pins,
   ]);
 
   run("node", [

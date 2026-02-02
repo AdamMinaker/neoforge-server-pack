@@ -115,6 +115,17 @@ async function getLatestVersion(projectId, gameVersion, loader) {
   return versions[0];
 }
 
+async function getPinnedVersion(projectId, versionNumber, gameVersion, loader) {
+  const params = new URLSearchParams({
+    game_versions: JSON.stringify([gameVersion]),
+    loaders: JSON.stringify([loader]),
+  });
+  const url = `${API_BASE}/project/${projectId}/version?${params.toString()}`;
+  const versions = await fetchJson(url);
+  if (!versions || versions.length === 0) return null;
+  return versions.find((version) => version.version_number === String(versionNumber)) || null;
+}
+
 function loadModList(filePath) {
   const raw = fs.readFileSync(filePath, "utf8");
   return raw
@@ -143,6 +154,7 @@ function parseArgs(argv) {
     output: "mods",
     mods: null,
     modsFile: null,
+    pins: "mods/modrinth_pins.json",
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -150,6 +162,7 @@ function parseArgs(argv) {
     else if (arg === "--game-version") args.gameVersion = argv[++i];
     else if (arg === "--output") args.output = argv[++i];
     else if (arg === "--mods-file") args.modsFile = argv[++i];
+    else if (arg === "--pins") args.pins = argv[++i];
     else if (arg === "--mods") {
       args.mods = [];
       while (argv[i + 1] && !argv[i + 1].startsWith("--")) {
@@ -168,7 +181,18 @@ function printHelp() {
   node modrinth_download.js --mods better-combat another-furniture
   node modrinth_download.js --mods-file mods.txt
   node modrinth_download.js --mods-file mods/mods.json
+  node modrinth_download.js --pins mods/modrinth_pins.json
 `);
+}
+
+function loadPins(filePath) {
+  if (!filePath || !fs.existsSync(filePath)) return {};
+  const raw = fs.readFileSync(filePath, "utf8");
+  const data = JSON.parse(raw);
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    throw new Error(`Expected JSON object in ${filePath}`);
+  }
+  return data;
 }
 
 async function main() {
@@ -194,6 +218,8 @@ async function main() {
     return 2;
   }
 
+  const pins = loadPins(args.pins);
+
   fs.mkdirSync(args.output, { recursive: true });
 
   const results = [];
@@ -215,15 +241,24 @@ async function main() {
         entry.serverSide = details.server_side;
       }
     }
-    const version = await getLatestVersion(project.id, args.gameVersion, args.loader);
+    const pinValue =
+      pins[entry.slug] ??
+      pins[entry.id] ??
+      pins[entry.query];
+    const version = pinValue
+      ? await getPinnedVersion(project.id, pinValue, args.gameVersion, args.loader)
+      : await getLatestVersion(project.id, args.gameVersion, args.loader);
     if (!version) {
-      entry.status = "no_version";
+      entry.status = pinValue ? "pinned_missing" : "no_version";
       results.push(entry);
       console.log(
-        `[MISS] ${query}: no ${args.loader} build for ${args.gameVersion} on Modrinth`
+        pinValue
+          ? `[MISS] ${query}: pinned version ${pinValue} not found for ${args.gameVersion}`
+          : `[MISS] ${query}: no ${args.loader} build for ${args.gameVersion} on Modrinth`
       );
       continue;
     }
+    if (pinValue) entry.pinned = pinValue;
 
     const files = version.files || [];
     if (files.length === 0) {

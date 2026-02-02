@@ -21,6 +21,7 @@ function parseArgs(argv) {
     externalFile: null,
     externalName: null,
     externalSide: null,
+    pins: "mods/modrinth_pins.json",
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -31,6 +32,7 @@ function parseArgs(argv) {
     else if (arg === "--mods-dir") args.modsDir = argv[++i];
     else if (arg === "--report") args.report = argv[++i];
     else if (arg === "--output") args.outputPack = argv[++i];
+    else if (arg === "--pins") args.pins = argv[++i];
     else if (arg === "--external-url") args.externalUrl = argv[++i];
     else if (arg === "--external-file") args.externalFile = argv[++i];
     else if (arg === "--external-name") args.externalName = argv[++i];
@@ -156,6 +158,8 @@ function main() {
     args.gameVersion,
     "--output",
     args.modsDir,
+    "--pins",
+    args.pins,
   ]);
 
   run("node", [

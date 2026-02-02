@@ -52,6 +52,8 @@ function main() {
     args.gameVersion,
     "--output",
     args.modsDir,
+    "--pins",
+    "mods/modrinth_pins.json",
   ]);
 
   run("node", [
