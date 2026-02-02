@@ -68,8 +68,8 @@
     "clientSide": "optional",
     "serverSide": "optional",
     "status": "downloaded",
-    "version": "1.9.14-1.21.11-neoforge",
-    "file": "konkrete_neoforge_1.9.14_MC_1.21.11.jar"
+    "version": "1.9.18-1.21.11-neoforge",
+    "file": "konkrete_neoforge_1.9.18_MC_1.21.11.jar"
   },
   {
     "query": "distant-horizons",
@@ -190,5 +190,17 @@
     "status": "downloaded",
     "version": "21.11.0",
     "file": "PickUpNotifier-v21.11.0-mc1.21.11-NeoForge.jar"
+  },
+  {
+    "query": "visual-workbench",
+    "id": "kfqD1JRw",
+    "slug": "visual-workbench",
+    "title": "Visual Workbench",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "VisualWorkbench-v21.11.1-mc1.21.11-NeoForge.jar"
   }
 ]
