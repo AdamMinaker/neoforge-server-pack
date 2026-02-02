@@ -323,17 +323,5 @@
     "status": "downloaded",
     "version": "1.21.11-1.19.33.100",
     "file": "lootr-neoforge-1.21.11-1.19.33.100.jar"
-  },
-  {
-    "query": "chunky",
-    "id": "fALzjamp",
-    "slug": "chunky",
-    "title": "Chunky",
-    "resolvedBy": "slug",
-    "clientSide": "optional",
-    "serverSide": "optional",
-    "status": "downloaded",
-    "version": "1.4.54",
-    "file": "Chunky-NeoForge-1.4.54.jar"
   }
 ]

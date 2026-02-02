@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node add_mod.js:*)"
+      "Bash(node add_mod.js:*)",
+      "Bash(node:*)"
     ]
   }
 }
