@@ -311,5 +311,17 @@
     "status": "downloaded",
     "version": "21.11.3",
     "file": "apexcore-21.11.3.jar"
+  },
+  {
+    "query": "lootr",
+    "id": "EltpO5cN",
+    "slug": "lootr",
+    "title": "Lootr",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "1.21.11-1.19.33.100",
+    "file": "lootr-neoforge-1.21.11-1.19.33.100.jar"
   }
 ]
