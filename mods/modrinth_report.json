@@ -215,5 +215,89 @@
     "status": "downloaded",
     "version": "1.21.11-1.21.11.2",
     "file": "FallingTree-1.21.11-1.21.11.2.jar"
+  },
+  {
+    "query": "fantasy-furniture",
+    "id": "A0nfCqYw",
+    "slug": "fantasy-furniture",
+    "title": "Fantasy's Furniture",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-21.11.1.jar"
+  },
+  {
+    "query": "fantasy-furniture-nordic",
+    "id": "DIHzMa8h",
+    "slug": "fantasys-furniture-nordic",
+    "title": "Fantasy's Furniture - Nordic",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-nordic-21.11.1.jar"
+  },
+  {
+    "query": "fantasy-furniture-venthyr",
+    "id": "FjHW4JvP",
+    "slug": "fantasys-furniture-venthyr",
+    "title": "Fantasy's Furniture - Venthyr",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-venthyr-21.11.1.jar"
+  },
+  {
+    "query": "fantasy-furniture-royal",
+    "id": "OIAm13ki",
+    "slug": "fantasys-furniture-royal",
+    "title": "Fantasy's Furniture - Royal",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-royal-21.11.1.jar"
+  },
+  {
+    "query": "fantasy-furniture-bone",
+    "id": "oJ4TI49S",
+    "slug": "fantasys-furniture-bone",
+    "title": "Fantasy's Furniture - Bone",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-bone-21.11.1.jar"
+  },
+  {
+    "query": "fantasy-furniture-decorations",
+    "id": "bJ7GIx0B",
+    "slug": "fantasys-furniture-decorations",
+    "title": "Fantasy's Furniture - Decorations",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.3",
+    "file": "fantasyfurniture-decorations-21.11.3.jar"
+  },
+  {
+    "query": "fantasy-furniture-dunmer",
+    "id": "Bs7e2IyQ",
+    "slug": "fantasys-furniture-dunmer",
+    "title": "Fantasy's Furniture - Dunmer",
+    "resolvedBy": "search",
+    "clientSide": "required",
+    "serverSide": "required",
+    "status": "downloaded",
+    "version": "21.11.1",
+    "file": "fantasyfurniture-dunmer-21.11.1.jar"
   }
 ]
