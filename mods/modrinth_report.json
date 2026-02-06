@@ -349,5 +349,17 @@
     "status": "downloaded",
     "version": "4.2.1",
     "file": "maplink-neoforge-4.2.1-1.21.11.jar"
+  },
+  {
+    "query": "cloth-config",
+    "id": "9s6osm5g",
+    "slug": "cloth-config",
+    "title": "Cloth Config API",
+    "resolvedBy": "slug",
+    "clientSide": "optional",
+    "serverSide": "optional",
+    "status": "downloaded",
+    "version": "21.11.153+neoforge",
+    "file": "cloth-config-21.11.153-neoforge.jar"
   }
 ]
