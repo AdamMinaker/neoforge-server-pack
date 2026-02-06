@@ -44,8 +44,8 @@
     "clientSide": "required",
     "serverSide": "optional",
     "status": "downloaded",
-    "version": "neoforge-1.21.11-1.40.8",
-    "file": "xaeroworldmap-neoforge-1.21.11-1.40.8.jar"
+    "version": "neoforge-1.21.11-1.40.10",
+    "file": "xaeroworldmap-neoforge-1.21.11-1.40.10.jar"
   },
   {
     "query": "just-zoom",
@@ -92,8 +92,8 @@
     "clientSide": "required",
     "serverSide": "optional",
     "status": "downloaded",
-    "version": "neoforge-1.21.11-25.3.7",
-    "file": "xaerominimap-neoforge-1.21.11-25.3.7.jar"
+    "version": "neoforge-1.21.11-25.3.9",
+    "file": "xaerominimap-neoforge-1.21.11-25.3.9.jar"
   },
   {
     "query": "ambientsounds",
@@ -320,6 +320,7 @@
     "resolvedBy": "slug",
     "clientSide": "required",
     "serverSide": "required",
+    "pinned": "1.21.11-1.19.33.100",
     "status": "downloaded",
     "version": "1.21.11-1.19.33.100",
     "file": "lootr-neoforge-1.21.11-1.19.33.100.jar"
@@ -336,5 +337,17 @@
     "status": "downloaded",
     "version": "27.3.0.9",
     "file": "jei-1.21.11-neoforge-27.3.0.9.jar"
+  },
+  {
+    "query": "maplink",
+    "id": "kiByZ6gx",
+    "slug": "maplink",
+    "title": "Map Link  (formerly Remote Player Waypoints for Xaero's Map)",
+    "resolvedBy": "slug",
+    "clientSide": "required",
+    "serverSide": "unsupported",
+    "status": "downloaded",
+    "version": "4.2.1",
+    "file": "maplink-neoforge-4.2.1-1.21.11.jar"
   }
 ]
