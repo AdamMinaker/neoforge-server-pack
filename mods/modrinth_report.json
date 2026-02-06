@@ -332,8 +332,9 @@
     "resolvedBy": "slug",
     "clientSide": "optional",
     "serverSide": "optional",
+    "pinned": "27.3.0.9",
     "status": "downloaded",
-    "version": "27.4.0.15",
-    "file": "jei-1.21.11-neoforge-27.4.0.15.jar"
+    "version": "27.3.0.9",
+    "file": "jei-1.21.11-neoforge-27.3.0.9.jar"
   }
 ]
